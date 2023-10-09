@@ -34,6 +34,7 @@ try:
     driver.get('https://market.vkplay.ru/inventory/1')
     time.sleep(10)
 
+# Authorization
     driver.find_element(By.XPATH, conf.auth).click()
     time.sleep(20)
 
@@ -53,8 +54,23 @@ try:
 
     press_enter = ActionChains(driver)
     press_enter = press_enter.send_keys(Keys.ENTER).perform()
+    time.sleep(60)
+
+# Click to element
+    driver.switch_to.window(driver.window_handles[0])
     time.sleep(10)
 
+    driver.get('https://market.vkplay.ru/inventory/1')
+    time.sleep(10)
+    driver.find_element(By.CLASS_NAME, conf.button_my_pin_code).click()
+    print("conf.button_my_pin_code")
+    two_tab = ActionChains(driver)
+    for _ in range(2):
+        two_tab = two_tab.send_keys(Keys.TAB)
+    two_tab.send_keys(Keys.ENTER)
+    two_tab.perform()
+    time.sleep(10)
+    print('Two Tab')
 
 
     # # html_source = driver.page_source
@@ -62,8 +78,7 @@ try:
     # # bs4 = BeautifulSoup(html_source, 'lxml')
     # # items_count = bs4.find(class_=conf.item_count_inventory).text.split(" ")[-1]
     #
-    # driver.find_element(By.CLASS_NAME, conf.button_my_pin_code).click()
-    # print("conf.button_my_pin_code")
+
 
 
 except Exception as ex:
